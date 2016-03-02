@@ -19,45 +19,45 @@ public class FileReaderSpout implements IRichSpout {
 	private BufferedReader _br;
 
 	public void ack(Object arg0) {
-		// TODO Auto-generated method stub
 	}
 
 	public void activate() {
-		// TODO Auto-generated method stub
 	}
 
 	public void close() {
 		try {
-			if(_br != null){
+			if (_br != null) {
 				_br.close();
 			}
-		} catch(IOException ignored) {} 
+		} catch (IOException ignored) {
+		}
 	}
 
 	public void deactivate() {
-		// TODO Auto-generated method stub	
 	}
 
 	public void fail(Object arg0) {
-		// TODO Auto-generated method stub
 	}
 
 	public void nextTuple() {
 		try {
-		Thread.sleep(100);
-		String line = _br.readLine();
-		if (line != null){
-			_collector.emit(new Values(line));
+			Thread.sleep(100);
+			String line = _br.readLine();
+			if (line != null) {
+				_collector.emit(new Values(line));
+			}
+		} catch (IOException ignored) {
+		} catch (InterruptedException ignored) {
 		}
-		}catch(IOException ignored) {} 
-		catch (InterruptedException ignored) {}
 	}
 
-	public void open(Map conf, TopologyContext context, SpoutOutputCollector collector) {
+	public void open(Map conf, TopologyContext context,
+			SpoutOutputCollector collector) {
 		_collector = collector;
 		try {
-		_br = new BufferedReader(new InputStreamReader(new FileInputStream("src/main/resources/pg2000.txt")));
-		}catch (IOException e) {
+			_br = new BufferedReader(new InputStreamReader(new FileInputStream(
+					"src/main/resources/pg2000.txt")));
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}

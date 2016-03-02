@@ -23,7 +23,8 @@ public class NormalizeBolt implements IBasicBolt {
 		return null;
 	}
 
-	public void cleanup() {}
+	public void cleanup() {
+	}
 
 	public void execute(Tuple tuple, BasicOutputCollector collector) {
 		String sentence = tuple.getStringByField("sentence");
@@ -31,6 +32,7 @@ public class NormalizeBolt implements IBasicBolt {
 		collector.emit(new Values(sentence));
 	}
 
-	public void prepare(Map conf, TopologyContext context) {}
+	public void prepare(Map conf, TopologyContext context) {
+	}
 
 }

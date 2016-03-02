@@ -16,7 +16,7 @@ public class WordCountBolt implements IBasicBolt {
 	private HashMap<String, Long> wordcounts;
 	
 	public void declareOutputFields(OutputFieldsDeclarer declarer) {
-		declarer.declare(new Fields("wordcount"));
+		declarer.declare(new Fields("word", "count"));
 	}
 
 	public Map<String, Object> getComponentConfiguration() {
@@ -33,7 +33,7 @@ public class WordCountBolt implements IBasicBolt {
 		}else {
 			wordcounts.put(word, 1L);
 		}
-		collector.emit(new Values(word + ", " + wordcounts.get(word)));
+		collector.emit(new Values(word, wordcounts.get(word)));
 	}
 
 	public void prepare(Map conf, TopologyContext context) {

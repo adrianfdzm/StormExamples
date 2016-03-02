@@ -13,10 +13,9 @@ import storm.trident.testing.MemoryMapState;
 import storm.trident.testing.Split;
 import storm.trident.topology.TridentTopologyBuilder;
 
-public class Main {
-
-	public static void main(String[] args) {
-
+public class Wordcount {
+	
+	private void run() {
 		TridentTopology topology = new TridentTopology();
 		// new FixedBatchSpout(fields, maxBatchSize, outputs)
 		@SuppressWarnings("unchecked")
@@ -26,6 +25,7 @@ public class Main {
 						"Hay muchos implementaciones de Spouts"), new Values(
 						"Para casi todos los origenes de datos"), new Values(
 						"Adios mundo"));
+		spout.setCycle(true);
 		topology.newStream("wordcount", spout)
 				.each(new Fields("sentence"), new Split(), new Fields("word"))
 				.groupBy(new Fields("word"))
@@ -40,5 +40,9 @@ public class Main {
 		cluster.submitTopology("wordcount", conf, topology.build());
 		Utils.sleep(10000);
 		cluster.killTopology("wordcount");
+	}
+
+	public static void main(String[] args) {
+		new Wordcount().run();
 	}
 }

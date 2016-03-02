@@ -14,16 +14,17 @@ public class ExclamationBolt implements IRichBolt {
 	private static final long serialVersionUID = 1L;
 	private OutputCollector _collector;
 
-	public void cleanup() { }
+	public void cleanup() {
+	}
 
 	public void execute(Tuple tuple) {
 		_collector.emit(new Values(tuple.getValueByField("word") + "!!!"));
 		_collector.ack(tuple);
 	}
 
-	public void prepare(Map conf, TopologyContext context, OutputCollector collector) {
+	public void prepare(Map conf, TopologyContext context,
+			OutputCollector collector) {
 		_collector = collector;
-
 	}
 
 	public void declareOutputFields(OutputFieldsDeclarer declarer) {

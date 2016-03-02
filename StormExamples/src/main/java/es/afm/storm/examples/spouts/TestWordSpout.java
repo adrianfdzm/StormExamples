@@ -13,31 +13,38 @@ import backtype.storm.tuple.Values;
 public class TestWordSpout implements IRichSpout {
 	private static final long serialVersionUID = 1L;
 	private SpoutOutputCollector _collector;
-	private final static String[] WORDS = {"Hola", "Mundo", "Storm"};
+	private final static String[] WORDS = { "Hola", "Mundo", "Storm" };
 	private Random _rnd;
-	
+
 	public TestWordSpout() {
 		_rnd = new Random(System.currentTimeMillis());
 	}
 
-	public void ack(Object arg0) {}
+	public void ack(Object arg0) {
+	}
 
-	public void activate() {}
+	public void activate() {
+	}
 
-	public void close() {}
+	public void close() {
+	}
 
-	public void deactivate() {}
+	public void deactivate() {
+	}
 
-	public void fail(Object arg0) { }
+	public void fail(Object arg0) {
+	}
 
 	public void nextTuple() {
 		try {
 			Thread.sleep(100);
 			_collector.emit(new Values(WORDS[_rnd.nextInt(WORDS.length)]));
-		} catch (InterruptedException ignored) { }
+		} catch (InterruptedException ignored) {
+		}
 	}
 
-	public void open(Map conf, TopologyContext context, SpoutOutputCollector collector) {
+	public void open(Map conf, TopologyContext context,
+			SpoutOutputCollector collector) {
 		_collector = collector;
 	}
 

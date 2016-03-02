@@ -16,6 +16,12 @@
 			<version>${storm.version}</version>
 			<scope>provided</scope>
 		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.storm</groupId>
+			<artifactId>storm-redis</artifactId>
+			<version>${storm.version}</version>
+		</dependency>
 	</dependencies>
 		
 </project>

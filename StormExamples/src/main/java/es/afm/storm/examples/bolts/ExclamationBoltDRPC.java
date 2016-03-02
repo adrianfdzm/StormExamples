@@ -21,13 +21,15 @@ public class ExclamationBoltDRPC implements backtype.storm.topology.IBasicBolt {
 		return null;
 	}
 
-	public void cleanup() {}
+	public void cleanup() {
+	}
 
 	public void execute(Tuple tuple, BasicOutputCollector collector) {
 		String word = tuple.getString(1);
 		collector.emit(new Values(tuple.getValue(0), word + "!!!"));
 	}
 
-	public void prepare(Map conf, TopologyContext context) {}
+	public void prepare(Map conf, TopologyContext context) {
+	}
 
 }
